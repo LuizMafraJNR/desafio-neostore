@@ -1,0 +1,10 @@
+INSERT INTO fornecedor (name, email, description, cnpj) VALUES ('Fornecedor A', 'fornecedorA@email.com', 'Fornecedor de equipamentos eletronicos', '12.345.678/0001-01');
+INSERT INTO fornecedor (name, email, description, cnpj) VALUES ('Distribuidora Tech', 'contato@distribuidoratech.com.br', 'Distribuicao de componentes de informatica', '23.456.789/0001-02');
+INSERT INTO fornecedor (name, email, description, cnpj) VALUES ('Suprimentos Express', 'vendas@suprimentosexpress.com', 'Materiais de escritorio e papelaria', '34.567.890/0001-03');
+INSERT INTO fornecedor (name, email, description, cnpj) VALUES ('IndustrialMaq', 'comercial@industrialmaq.ind.br', 'Maquinas industriais e equipamentos pesados', '45.678.901/0001-04');
+INSERT INTO fornecedor (name, email, description, cnpj) VALUES ('Alimentos do Sul', 'pedidos@alimentosdosul.com.br', 'Distribuidor de alimentos industrializados', '56.789.012/0001-05');
+INSERT INTO fornecedor (name, email, description, cnpj) VALUES ('Quimica Brasil', 'quimicabrasil@qbr.com', 'Produtos quimicos e solucoes industriais', '67.890.123/0001-06');
+INSERT INTO fornecedor (name, email, description, cnpj) VALUES ('TechSolutions', 'comercial@techsolutions.com.br', 'Servicos de TI e infraestrutura', '78.901.234/0001-07');
+INSERT INTO fornecedor (name, email, description, cnpj) VALUES ('TransportaNorte', 'operacoes@transportanorte.com', 'Servicos de logistica e transporte', '89.012.345/0001-08');
+INSERT INTO fornecedor (name, email, description, cnpj) VALUES ('MoveisEMP', 'atendimento@moveisemp.com.br', 'Mobilario corporativo e escritorios', '90.123.456/0001-09');
+INSERT INTO fornecedor (name, email, description, cnpj) VALUES ('Construtora Horizonte', 'projetos@construtorahorizonte.com', 'Material de construcao e ferramentas', '01.234.567/0001-10');

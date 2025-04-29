@@ -1,6 +1,6 @@
 package com.br.neostore.application.exception;
 
-public class InvalidCnpjException extends BusinessException
+public class InvalidCnpjException extends RuntimeException
 {
 	public InvalidCnpjException(String message)
 	{

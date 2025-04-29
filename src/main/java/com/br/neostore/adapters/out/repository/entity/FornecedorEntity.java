@@ -1,7 +1,5 @@
 package com.br.neostore.adapters.out.repository.entity;
 
-import com.br.neostore._shared.validation.annotations.ValidCnpj;
-import com.br.neostore._shared.validation.annotations.ValidEmail;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

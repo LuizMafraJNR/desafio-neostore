@@ -4,6 +4,7 @@ import com.br.neostore.application.exception.BusinessException;
 import com.br.neostore.application.exception.InvalidCnpjException;
 import com.br.neostore.application.exception.InvalidEmailException;
 import com.br.neostore.application.exception.SupplierNotFoundException;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.core.Response;
@@ -21,10 +22,14 @@ public class GlobalExceptionHandler implements ExceptionMapper<Throwable>
 	@Override
 	public Response toResponse(Throwable throwable)
 	{
-		Throwable cause = throwable.getCause();
+		Throwable cause = throwable.getCause() != null ? throwable.getCause() : throwable;
 		if (cause instanceof ConstraintViolationException)
 		{
 			return handleConstraintViolationException((ConstraintViolationException) throwable);
+		}
+		else if (cause instanceof UnrecognizedPropertyException)
+		{
+			return handleUnrecognizedPropertyException((UnrecognizedPropertyException) throwable);
 		}
 		else if (cause instanceof InvalidParameterException)
 		{
@@ -62,6 +67,18 @@ public class GlobalExceptionHandler implements ExceptionMapper<Throwable>
 		{
 			return handleInternalServerError(throwable);
 		}
+	}
+
+	private Response handleUnrecognizedPropertyException(UnrecognizedPropertyException ex)
+	{
+		Problem problem = Problem.builder()
+			.status(Response.Status.BAD_REQUEST.getStatusCode())
+			.title("Propriedade  Não Reconhecida")
+			.detail("Parece que alguma propriedade enviada não é esperada no corpo da requisição.")
+			.userMessage("A propriedade '" + ex.getPropertyName() + "' não é reconhecida.")
+			.dateTime(OffsetDateTime.now())
+			.build();
+		return Response.status(Response.Status.BAD_REQUEST).entity(problem).build();
 	}
 
 	private Response handleExceptionInternal(Throwable throwable, Object body, int status)

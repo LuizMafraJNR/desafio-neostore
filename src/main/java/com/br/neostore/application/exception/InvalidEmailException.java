@@ -1,6 +1,6 @@
 package com.br.neostore.application.exception;
 
-public class InvalidEmailException extends BusinessException
+public class InvalidEmailException extends RuntimeException
 {
 	public InvalidEmailException(String message)
 	{

@@ -90,66 +90,39 @@ public class FornecedorController {
     @Path("/{id}")
     public Response atualizar(@PathParam("id") Long id, @Valid FornecedorRequest fornecedorRequest)
     {
-        try
-        {
-            return Response.ok(updateFornecedorByIdInputPort.execute(id, fornecedorMapper.toDomain(fornecedorRequest)))
-                .build();
-        }
-        catch (Exception e)
-        {
-            throw new RuntimeException(e);
-        }
+        return Response.ok(
+                updateFornecedorByIdInputPort.execute(id, fornecedorMapper.toDomain(fornecedorRequest)))
+            .build();
     }
 
     @POST
     public Response criar(@Valid FornecedorRequest fornecedorRequest)
     {
-        try
-        {
-            return Response.status(Response.Status.CREATED)
-                .entity(insertFornecedorInputPort.execute(fornecedorMapper.toDomain(fornecedorRequest)))
-                .build();
-        }
-        catch (Exception e)
-        {
-            throw new RuntimeException(e);
-        }
+        return Response.status(Response.Status.CREATED)
+            .entity(insertFornecedorInputPort.execute(fornecedorMapper.toDomain(fornecedorRequest)))
+            .build();
     }
 
     @POST
     @Path("/importar")
     public Response importar(@Valid List<FornecedorRequest> fornecedorRequests)
     {
-        try
-        {
-            var fornecedoresImportados = importarFornecedoresInputPort.execute(fornecedorMapper.toDomainList(fornecedorRequests));
-            return Response.status(Response.Status.CREATED)
-                .entity(fornecedorMapper.toResponseList(fornecedoresImportados))
-                .build();
-        }
-        catch (Exception e)
-        {
-            throw new RuntimeException(e);
-        }
+        var fornecedoresImportados = importarFornecedoresInputPort.execute(fornecedorMapper.toDomainList(fornecedorRequests));
+        return Response.status(Response.Status.CREATED)
+            .entity(fornecedorMapper.toResponseList(fornecedoresImportados))
+            .build();
     }
 
     @DELETE
     @Path("/{id}")
     public Response deletar(@PathParam("id") Long id)
     {
-        try
+        var fornecedor = findFornecedorByIdInputPort.execute(id);
+        if (fornecedor == null)
         {
-            var fornecedor = findFornecedorByIdInputPort.execute(id);
-            if (fornecedor == null)
-            {
-                return Response.status(Response.Status.NOT_FOUND).build();
-            }
-            deleteFornecedorByIdInputPort.execute(id);
-            return Response.noContent().build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        catch (Exception e)
-        {
-            throw new RuntimeException(e);
-        }
+        deleteFornecedorByIdInputPort.execute(id);
+        return Response.noContent().build();
     }
 }

@@ -1,7 +1,9 @@
 package com.br.neostore.application.core.domain;
 
 import com.br.neostore.application.exception.InvalidCnpjException;
+import com.br.neostore.application.exception.InvalidEmailException;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class Fornecedor {
     private Long id;
@@ -11,8 +13,9 @@ public class Fornecedor {
     private String cnpj;
 
     public Fornecedor(String name, String email, String description, String cnpj) {
-        if (!email.contains("@") || !email.contains(".")) throw new IllegalArgumentException("Email Inválido");
-        if (name == null || name.isEmpty()) throw new IllegalArgumentException("Nome Inválido");
+        if (!Pattern.compile("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$").matcher(email).matches()) {
+            throw new InvalidEmailException("Email Inválido");
+        }
         if (cnpj == null || cnpj.isEmpty() || (cnpj.length() < 14 || cnpj.length() > 18)) throw new InvalidCnpjException("CNPJ Inválido");
         this.name = name;
         this.email = email;

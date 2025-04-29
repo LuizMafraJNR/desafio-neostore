@@ -16,18 +16,12 @@ import java.util.Optional;
 @Transactional(rollbackOn = Exception.class)
 public class FornecedorRepositoryImpl implements FornecedorRepository
 {
-    private final FornecedorEntityMapper mapper;
-
-    @Inject
-    public FornecedorRepositoryImpl(FornecedorEntityMapper mapper)
-    {
-        this.mapper = mapper;
-    }
+    private static EntityManagerFactoryUtil emfu = new EntityManagerFactoryUtil();
 
     @Override
     public FornecedorEntity salvar(FornecedorEntity fornecedor)
     {
-        EntityManager em = EntityManagerFactoryUtil.getInstance().getEntityManager();
+        EntityManager em = emfu.getEntityManager();
         try
         {
             em.getTransaction().begin();
@@ -63,7 +57,7 @@ public class FornecedorRepositoryImpl implements FornecedorRepository
     @Override
     public void deletarPorId(Long id)
     {
-        EntityManager em = EntityManagerFactoryUtil.getInstance().getEntityManager();
+        EntityManager em = emfu.getEntityManager();
         try
         {
             em.getTransaction().begin();
@@ -94,7 +88,7 @@ public class FornecedorRepositoryImpl implements FornecedorRepository
     @Override
     public Optional<FornecedorEntity> buscarPorId(Long id)
     {
-        EntityManager em = EntityManagerFactoryUtil.getInstance().getEntityManager();
+        EntityManager em = emfu.getEntityManager();
         try
         {
             FornecedorEntity entity = em.find(FornecedorEntity.class, id);
@@ -109,7 +103,7 @@ public class FornecedorRepositoryImpl implements FornecedorRepository
     @Override
     public List<FornecedorEntity> listar()
     {
-        EntityManager em = EntityManagerFactoryUtil.getInstance().getEntityManager();
+        EntityManager em = emfu.getEntityManager();
         try
         {
             TypedQuery<FornecedorEntity> query = em.createQuery("SELECT f FROM Fornecedor f",
@@ -126,7 +120,7 @@ public class FornecedorRepositoryImpl implements FornecedorRepository
     @Override
     public List<FornecedorEntity> listarPaginado(int page, int size)
     {
-        EntityManager em = EntityManagerFactoryUtil.getInstance().getEntityManager();
+        EntityManager em = emfu.getEntityManager();
         try {
             TypedQuery<FornecedorEntity> query = em.createQuery("SELECT f FROM Fornecedor f", FornecedorEntity.class);
             query.setFirstResult(page);
@@ -142,7 +136,7 @@ public class FornecedorRepositoryImpl implements FornecedorRepository
     @Override
     public long contagem()
     {
-        EntityManager em = EntityManagerFactoryUtil.getInstance().getEntityManager();
+        EntityManager em = emfu.getEntityManager();
         try {
             return em.createQuery("SELECT COUNT(f) FROM Fornecedor f", Long.class).getSingleResult();
         }
