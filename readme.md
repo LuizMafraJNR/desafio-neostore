@@ -326,6 +326,8 @@ mvn clean install
     - Exemplo: `DELETE http://localhost:8080/neostore/api/v1/fornecedores/1`
         
 
+Tenho o link do [postman](https://.postman.co/workspace/My-Workspace~f14475b1-1d05-48d7-84d1-5d0291090aef/collection/32259010-059d2269-fc52-425b-b1db-e042a10ee385?action=share&creator=32259010) com as URI
+
 ## Considerações Finais
 
 Este projeto tive algumas complicações bem por falta de atenção, principalmente no CDI. Tive que fazer algumas pesquisas para entender novamente como que fazia para realizar a persistência de dados, já que não utilizo o EntityManager diariamente(no baixo nivel), então acabei esquecendo algumas coisas, por estar acostumado a utilizar o Spring.
